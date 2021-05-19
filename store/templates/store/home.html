@@ -1,0 +1,66 @@
+
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="d-flex justify-content-center">
+
+
+<div class="container">
+
+
+
+<a class="btn1 btn-outline-primary add-btn " id="up-cart" href="{% url 'cart' %}"> <strong>Go to Cart {{order.cart_total_item}} &#10132  </strong>  </a></td>
+</div>
+</div>
+<div class='container-sm' >
+	<div class="row g-4 ">
+
+   
+    <br>
+
+		{% for product in products %}
+
+
+		<div class="col-lg-4 p-3 ">
+
+       
+            <div class="box-element text-center">
+			<img class="img-fluid" src="{{product.imageURL}}">
+            
+			
+				<h3><strong>{{product.name}}</strong></h3>
+                <h4> <strong> $ {{product.price}}</strong></h4>
+				<button id={{product.id}} data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+		{% for item in items %}
+		{% if item.products.name == product.name %}	
+		{% if item.quantity > 0  %}
+		<script> var myobj = document.getElementById("{{product.id}}");
+			myobj.remove();</script>
+		
+		<button data-product={{product.id}} data-action="delete"class="btn btn-outline-secondary add-btn update-cart">Remove</button>
+		{%endif%}
+		
+		{% if item.quantity > 0  %} 
+		<span style="padding-left:10px"></span>
+	
+		<div  class="quantity  ">
+			
+			<img data-product="{{product.id}}" data-action="add" class="chg-quantity  update-cart" src="{% static  'images/plus.png' %}">
+		<div> <h5><strong class="" >  {{item.quantity}} </strong> </h5>   </div>
+			<img data-product="{{product.id}}" data-action="remove" class="chg-quantity update-cart" src="{% static  'images/minus.png' %}">
+		</div>
+		{%endif%}
+		{%endif%}
+		{%endfor%}
+				<a class="btn btn-outline-success" href="#">View</a>
+				
+
+			</div>
+		</div>
+       <br>
+		{% endfor %}
+  </div>
+  </div>
+{% endblock content %}
+

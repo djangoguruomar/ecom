@@ -1,0 +1,78 @@
+
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container ">
+  <div class="col-6">
+  <p> Name: {{user.username}}</p>
+  <p>Mail: {{user.email}}</p>
+  <p>Phone:</p>
+  </div>
+
+   <h1 class='text-center'>Order Summery</h1>
+    <br>
+<div class='container center '>
+	<div class="row g-4 ">
+   
+
+		{% for order in orders %}
+    {%if order.customer == user.customer%}
+
+		<div class="col-lg-8 p-3 ">
+
+
+       
+            <div class="box-element text-center">
+  
+<table class="table ">
+  <thead>
+  <tr> 
+   <h3 class='text-center' > <strong>{{order.customer}}</strong>  </h3>
+  </tr>
+    <tr>
+      <th scope="col">Product Name</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Unit Price</th>
+      <th scope="col">Total Price</th>
+    </tr>
+  </thead>
+  <tbody>
+ {% for item in items  %}
+ {% if item.order == order %}
+    <tr>
+      <td>{{item.products.name}}</td>
+      <td>{{item.quantity}}</td>
+      <td>{{item.products.price}}</td>
+      <td>{{item.get_total}}</td>
+    </tr>
+    {%endif%}
+    {% endfor %}
+       <tr>
+      <td></td>
+      <td></td>
+      <td><strong>Cart Total: {{order.cart_total_item}} </strong></td>
+      <td><strong> Grand Total: $ {{order.grand_total}} </strong></td>
+    </tr>
+
+
+
+    
+   
+
+  </tbody>
+</table>
+</div>
+</div>
+
+<br>
+<br><br>
+ {%endif%}
+  {%endfor%}
+ </div>
+    </div>
+   </div>
+
+   
+
+ {%endblock%}

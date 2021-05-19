@@ -1,0 +1,48 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+  <div class="row">
+		<div class="col-lg-6">
+			<div class="box-element">
+			<br>
+				<a  class="btn1 btn-outline-dark" href="{% url 'cart' %}">  Back to Cart</a>
+				<hr>
+				<h3>Order Summary</h3>
+				<hr>
+				{% for item in items %}
+				<div class="cart-row">
+					<div style="flex:2"><img class="row-image" src="{{item.products.imageURL}}"></div>
+					<div style="flex:2"><p>{{item.products.name}}</p></div>
+					<div style="flex:1"><p>${{item.products.price|floatformat:2}}</p></div>
+					<div style="flex:1"><p>x{{item.quantity}}</p></div>
+				</div>
+				{% endfor %}
+				<h5>Items:   {{order.cart_total_item}}</h5>
+				<h5>Total:   ${{order.grand_total}}</h5>
+			</div>
+		</div>
+
+
+
+   
+		<div class="col-lg-6">
+			<div class="box-element" >
+
+            <form action="" method="post">
+                {% csrf_token %}
+                <table>
+                {{ form }}
+                </table>
+                <input type="submit" value="Submit">
+            </form>
+
+        </div>
+		 </div>
+    </div>
+
+</div>
+
+
+{% endblock content %}

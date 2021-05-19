@@ -1,0 +1,60 @@
+{%extends 'store/main.html' %}
+{%load static %}
+{%block content%}
+
+
+<div class='container' >
+<div class='text-center'> 
+
+<h1>Cart Details</h1>
+
+
+<p><strong>Cart Total: {{order.cart_total_item}} </strong></p>
+<p><strong> Grand Total: $ {{order.grand_total}} </strong></p>
+<br>
+</div>
+<a class="btn btn-outline-primary add-btn " href="{% url 'store' %}"> <strong> Continue Shopping</strong>  </a>
+<a class="btn1 btn-outline-primary add-btn " href="{% url 'checkout' %}"> <strong> Checkout</strong>  </a>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Product Name</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Unit Price</th>
+      <th scope="col">Total Price</th>
+    </tr>
+  </thead>
+  <tbody>
+ {% for item in items  %}
+    <tr>
+      <td><div style="flex:2"><img class="row-image" src="{{item.products.imageURL}}"></div></td>
+      <td>{{item.products.name}}</td>
+      <td>{{item.quantity}}</td>
+      <td>{{item.products.price}}</td>
+      <td>{{item.get_total}}</td>
+    </tr>
+    {% endfor %}
+       <tr>
+      <td></td>
+      <td></td>
+      <td><strong>Cart Total: {{order.cart_total_item}} </strong></td>
+      <td></td>
+      <td><strong> Grand Total: $ {{order.grand_total}} </strong></td>
+    </tr>
+
+  
+
+
+
+    
+   
+
+  </tbody>
+</table>
+
+</div>
+
+
+{% endblock content %}
